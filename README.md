@@ -1,7 +1,7 @@
 # VEDA • Music AI & Interactive Voice Studio
 
 <div align="center">
-  <img src="public/svg/bloub-nuage-curieux-bleu-anime.svg" width="160" alt="Veda Avatar" />
+  <img src="SVG/bloub-nuage-curieux-bleu-anime.svg" width="160" alt="Veda Avatar" />
   <br>
   <br>
 

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Veda • Music AI</title>
-  <meta name="description" content="Veda Music AI - Voice-controlled music player with real-time waveform visualizer, instant barge-in, and synchronized Spotify-style lyrics.">
+  <meta name="description"
+    content="Veda Music AI - Voice-controlled music player with real-time waveform visualizer, instant barge-in, and synchronized Spotify-style lyrics.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <script>
     // Instant intro bypass & theme restoration
@@ -18,15 +22,16 @@
       if (localStorage.getItem("veda_theme") === "dark") {
         document.documentElement.classList.add("dark-theme");
       }
-    } catch (_) {}
+    } catch (_) { }
   </script>
 </head>
+
 <body>
 
   <!-- Intro Image Entry Point (Landing Overlay) -->
   <div class="power-overlay" id="powerOverlay">
     <div class="intro-hero-wrapper">
-      <img src="/svg/intro_image.png" alt="Veda Music AI Intro" class="fullscreen-intro-img" id="introHeroImg">
+      <img src="/SVG/intro_image.png" alt="Veda Music AI Intro" class="fullscreen-intro-img" id="introHeroImg">
       <div class="intro-backdrop-gradient"></div>
 
       <!-- Text & Enter Button Layer Above the Image -->
@@ -65,7 +70,7 @@
       <!-- Left: Veda Brand Logo -->
       <div class="brand-logo" id="brandLogo">
         <div class="brand-icon-box">
-          <img src="/svg/bloub-nuage-curieux-bleu-anime.svg" alt="Veda Cloud Logo" class="brand-cloud-icon">
+          <img src="/SVG/bloub-nuage-curieux-bleu-anime.svg" alt="Veda Cloud Logo" class="brand-cloud-icon">
         </div>
         <span class="brand-name">Veda</span>
       </div>
@@ -75,8 +80,10 @@
         <div class="ticker-delimiter left-delimiter"></div>
         <div class="ticker-track-window">
           <div class="ticker-scroll-text" id="tickerScrollText">
-            <span class="ticker-phrase">TRY SAYING: "VEDA, PLAY JAPANESE CITY POP" • "PLAY DEFTONES - ROSEMARY" • "PLAY SOMETHING LIKE BEACH HOUSE" • </span>
-            <span class="ticker-phrase" aria-hidden="true">TRY SAYING: "VEDA, PLAY JAPANESE CITY POP" • "PLAY DEFTONES - ROSEMARY" • "PLAY SOMETHING LIKE BEACH HOUSE" • </span>
+            <span class="ticker-phrase">TRY SAYING: "VEDA, PLAY JAPANESE CITY POP" • "PLAY DEFTONES - ROSEMARY" • "PLAY
+              SOMETHING LIKE BEACH HOUSE" • </span>
+            <span class="ticker-phrase" aria-hidden="true">TRY SAYING: "VEDA, PLAY JAPANESE CITY POP" • "PLAY DEFTONES -
+              ROSEMARY" • "PLAY SOMETHING LIKE BEACH HOUSE" • </span>
           </div>
         </div>
         <div class="ticker-delimiter right-delimiter"></div>
@@ -85,12 +92,14 @@
       <!-- Right: Controls (Dark Mode, DJ Lights, Mic State Indicator) -->
       <div class="header-state-wrapper">
         <!-- Dark Mode Toggle Button -->
-        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark / Light Mode" aria-label="Toggle Dark Mode">
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark / Light Mode"
+          aria-label="Toggle Dark Mode">
           <span class="theme-icon" id="themeIcon">🌙</span>
         </button>
 
         <!-- DJ Lights Toggle Button -->
-        <button class="dj-lights-toggle-btn active" id="djLightsToggleBtn" title="Toggle Music-Synced DJ Party Lights" aria-label="Toggle Party Lights">
+        <button class="dj-lights-toggle-btn active" id="djLightsToggleBtn" title="Toggle Music-Synced DJ Party Lights"
+          aria-label="Toggle Party Lights">
           <span class="dj-lights-icon">✨</span>
           <span class="dj-lights-label">DJ Lights</span>
         </button>
@@ -120,11 +129,13 @@
     <!-- 2. Central Stage & Dynamic State Swap (Avatar <-> Waveform Visualizer) -->
     <section class="central-stage" id="centralStage">
       <div class="stage-swap-wrapper" id="stageSwapWrapper">
-        
+
         <!-- Paused State: Prominent Blue Cloud Avatar -->
-        <div class="stage-view avatar-view active" id="avatarStageView" role="button" tabindex="0" title="Click to Talk to Veda">
+        <div class="stage-view avatar-view active" id="avatarStageView" role="button" tabindex="0"
+          title="Click to Talk to Veda">
           <div class="cloud-avatar-frame" id="avatarFrame">
-            <img src="/svg/bloub-nuage-curieux-bleu-anime.svg" alt="Veda Cloud Avatar" class="cloud-avatar-graphic" id="avatarGraphic">
+            <img src="/SVG/bloub-nuage-curieux-bleu-anime.svg" alt="Veda Cloud Avatar" class="cloud-avatar-graphic"
+              id="avatarGraphic">
           </div>
           <div class="avatar-tap-hint" id="avatarTapHint">
             <span id="transcriptLive">Say "Hey Veda" or click avatar to talk</span>
@@ -155,7 +166,8 @@
         <div class="deck-meta-row" id="deckMetaRow">
           <!-- Square Album Artwork Block -->
           <div class="deck-cover-container" id="deckCoverContainer">
-            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/hqdefault.jpg" alt="Track Cover" class="deck-cover-image" id="deckCoverImg">
+            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/hqdefault.jpg" alt="Track Cover" class="deck-cover-image"
+              id="deckCoverImg">
             <div class="deck-cover-fallback" id="deckCoverFallback"></div>
           </div>
 
@@ -193,32 +205,35 @@
             <!-- Previous Track -->
             <button class="deck-btn prev-btn" id="prevBtn" title="Previous Track" aria-label="Previous Track">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
               </svg>
             </button>
 
             <!-- Play / Pause Button -->
             <button class="deck-btn play-pause-btn" id="playPauseBtn" title="Play or Pause" aria-label="Play or Pause">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" id="mainPlayIcon">
-                <path d="M8 5v14l11-7z"/>
+                <path d="M8 5v14l11-7z" />
               </svg>
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" id="mainPauseIcon" style="display: none;">
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" id="mainPauseIcon"
+                style="display: none;">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
               </svg>
             </button>
 
             <!-- Next Track -->
             <button class="deck-btn next-btn" id="nextBtn" title="Next Track" aria-label="Next Track">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
               </svg>
             </button>
           </div>
 
           <!-- Far Right: Dedicated Music Note / Lyrics Toggle Button -->
-          <button class="deck-btn lyrics-toggle-btn" id="lyricsToggleBtn" title="Toggle Spotify-Style Lyrics" aria-label="Toggle Lyrics">
+          <button class="deck-btn lyrics-toggle-btn" id="lyricsToggleBtn" title="Toggle Spotify-Style Lyrics"
+            aria-label="Toggle Lyrics">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zM19 12v2h-4v-2h4zm0 4v2h-4v-2h4z"/>
+              <path
+                d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zM19 12v2h-4v-2h4zm0 4v2h-4v-2h4z" />
             </svg>
           </button>
         </div>
@@ -235,20 +250,24 @@
         </div>
         <button class="lyrics-close-btn" id="closeLyricsBtn" aria-label="Close Lyrics Panel" title="Close">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
           </svg>
         </button>
       </div>
 
       <div class="lyrics-panel-scroll-area" id="lyricsScrollArea">
         <div class="spotify-lyrics-stream" id="spotifyLyricsStream">
-          <div class="spotify-lyric-line placeholder active">Tap play or request any song to view synchronized lyrics...</div>
+          <div class="spotify-lyric-line placeholder active">Tap play or request any song to view synchronized lyrics...
+          </div>
         </div>
       </div>
     </aside>
 
     <!-- Hidden Backward-Compatibility & YT Engine Mounts -->
-    <div id="ytPlayerContainer" style="position: absolute; bottom: 0; left: 0; width: 1px; height: 1px; opacity: 0.001; pointer-events: none;"></div>
+    <div id="ytPlayerContainer"
+      style="position: absolute; bottom: 0; left: 0; width: 1px; height: 1px; opacity: 0.001; pointer-events: none;">
+    </div>
     <div id="avatarCenterpiece" style="display: none;"></div>
     <div id="soundwaveCanvas" style="display: none;"></div>
     <div id="trackBubble" style="display: none;"></div>
@@ -270,4 +289,5 @@
   <script src="/js/app.js"></script>
 
 </body>
+
 </html>

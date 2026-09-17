@@ -17,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/SVG", express.static(path.join(__dirname, "SVG")));
+app.use("/svg", express.static(path.join(__dirname, "SVG")));
 
 let currentPlayingTrack = null;
 
