@@ -1,10 +1,33 @@
-# ☁️ VEDA • Music AI & Interactive Voice Studio
+# VEDA • Music AI & Interactive Voice Studio
+
+<div align="center">
+  <img src="public/svg/bloub-nuage-curieux-bleu-anime.svg" width="160" alt="Veda Avatar" />
+  <br>
+  <br>
 
 [![Veda License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js Version](https://img.shields.io/badge/Node.js-18%2B-brightgreen.svg)](https://nodejs.org)
 [![Theme](https://img.shields.io/badge/Theme-Light%20%7C%20Dark%20Mode-blueviolet.svg)](https://github.com/Ish-xo/Veda)
 
-**Veda** is an intelligent, voice-controlled music player and conversational AI studio. Powered by real-time speech recognition, hardware AGC audio boost, Edge neural voice synthesis, audio-reactive waveforms, and dynamic ambient DJ stage lights synced live to album cover artwork.
+  <p><em>An intelligent, voice-controlled music player and conversational AI studio.</em></p>
+</div>
+
+---
+
+## 📸 Visual Showcase
+
+<div align="center">
+  <h3>✨ Live Ambient Visualizer & Music Player</h3>
+  <img src="assets/screenshots/veda_stage_playing.png" width="90%" alt="Veda Playing Stage" />
+  <br><br>
+  
+  <h3>🎙️ Unlocked Studio Interface</h3>
+  <img src="assets/screenshots/unlocked_studio.png" width="90%" alt="Veda Unlocked Studio" />
+  <br><br>
+  
+  <h3>🎬 Fullscreen Intro Landing Experience</h3>
+  <img src="assets/screenshots/intro_landing.png" width="90%" alt="Veda Intro Landing Screen" />
+</div>
 
 ---
 
@@ -26,7 +49,7 @@
 - **Navbar Theme Switcher**: Instant toggle between crisp Pure White theme and obsidian Dark Mode (`#070b14`) with `localStorage` persistence.
 - **Bounded Scrolling Marquee**: Center ticker bounded by vertical delimiter lines displaying command suggestions.
 - **Dynamic Stage View Swap**:
-  - **Paused State**: Blue Cloud Avatar (clickable for manual wake-up).
+  - **Paused State**: Veda Avatar (clickable for manual wake-up).
   - **Playing State**: 7 rounded audio waveform bars bouncing rhythmically to live audio.
 - **Player Deck**: Bounded track metadata, seek bar, time labels, and playback controls.
 
@@ -103,7 +126,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. Click **Ent
 │   │   ├── app.js         # Core orchestrator, theme manager & cover art extractor
 │   │   ├── audio-engine.js# Web Audio API, YouTube player & visualizer engine
 │   │   └── speech-engine.js# Low-pitch STT, AGC booster & phonetic wake detector
-│   └── svg/               # Brand assets & cloud avatar graphics
+│   └── svg/               # Brand assets & Veda avatar graphics
+├── assets/
+│   └── screenshots/       # Screenshots for visual showcase
 ├── server.js              # Express backend, YouTube music search, Edge TTS & lyrics API
 ├── test-e2e.js            # Automated end-to-end test suite (12 suites, 100% coverage)
 ├── package.json           # Project dependencies & scripts
