@@ -1,99 +1,127 @@
-# ☁️ VEDA • Voice-Controlled Music AI
+# ☁️ VEDA • Music AI & Interactive Voice Studio
 
-[![Node.js](https://img.shields.io/badge/Node.js-18+-68a063?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![JavaScript](https://img.shields.io/badge/ES6+-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Veda License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js Version](https://img.shields.io/badge/Node.js-18%2B-brightgreen.svg)](https://nodejs.org)
+[![Theme](https://img.shields.io/badge/Theme-Light%20%7C%20Dark%20Mode-blueviolet.svg)](https://github.com/Ish-xo/Veda)
 
-> **Veda** is a next-generation voice-controlled music player and AI companion featuring real-time audio waveform visualizers, instant voice barge-in, music-synced fullscreen DJ lights, and synchronized Spotify-style lyrics.
-
----
-
-## 🌟 Key Features
-
-### 🎙️ 1. Intelligent Voice AI & Low-Pitch Speech Engine
-- **Broad Phonetic Wake-Word Matching**: Recognizes *"Hey Veda"*, *"Veda"*, *"Vida"*, *"Vedha"*, and various regional accents or phonetic speech interpretations.
-- **Hardware AGC Audio Gain Boost**: Leverages browser hardware Auto Gain Control (`getUserMedia`) to capture low-pitch, deep, or whispered voices clearly.
-- **Direct Intent Recognition**: Auto-wakes immediately on commands like *"Play Starboy"*, *"Pause"*, *"Next song"*, *"Rewind 10 seconds"*, etc.
-
-### ⚡ 2. Instant Voice Barge-In & Music Pause
-- Saying *"Hey Veda"* in the middle of a song **immediately pauses playback in `< 15ms`**, triggers an acoustic wake chime, and activates the live listening state (`🎙️ Listening...`).
-- **Silence Auto-Resume**: If no command is spoken within 8 seconds, Veda automatically resumes the music seamlessly.
-
-### ✨ 3. Fullscreen Ambient DJ & Party Lights
-- **Edge-to-Edge Coverage**: 4 fullscreen corner washes (`washTL`, `washTR`, `washBL`, `washBR`), pulsing central radial orbs, and sweeping laser strobe beams.
-- **Crystal-Clear Aesthetic**: Clean radial luminescence without foggy or milky haze, keeping the central avatar, waveforms, and text razor-sharp.
-- **Live Album Art Color Extraction**: Automatically samples dominant and vibrant secondary colors from each song's album artwork (`track.thumbnail`) to dynamically recolor the ambient stage lights and lyrics background in real time.
-
-### 🌓 4. Single-Screen Minimal UI & Dark Mode Toggle
-- **Light & Obsidian Dark Mode**: Seamless toggle button (`🌙` / `☀️`) in the top navigation bar with persistent state across page reloads (`localStorage`).
-- **Bounded Scrolling Marquee Ticker**: Smooth continuous ticker displaying voice command suggestions bounded by tactile delimiter lines.
-- **Dynamic State Swap**: Crossfades between the blue cloud avatar (Paused/Idle) and 7 animated rounded blue waveform bars (Playing).
-
-### 📜 5. Spotify-Style Synchronized Lyrics Panel
-- Slide-out lyrics panel with real-time synchronized karaoke scrolling powered by LRCLIB.
-- Interactive lyric line jumping: Click any line to seek directly to that timestamp.
+**Veda** is an intelligent, voice-controlled music player and conversational AI studio. Powered by real-time speech recognition, hardware AGC audio boost, Edge neural voice synthesis, audio-reactive waveforms, and dynamic ambient DJ stage lights synced live to album cover artwork.
 
 ---
 
-## 🚀 Getting Started
+## ✨ Features & Architecture
 
-### Prerequisites
+### 1. 🎙️ Intelligent Voice AI & Low-Pitch Sensitivity
+- **Broad Phonetic Wake Detection**: Say *"Hey Veda"* or *"Veda"* in any tone, dialect, whisper, or deep low-pitch voice.
+- **Hardware AGC (Auto Gain Control)**: Leverages browser hardware gain adjustments to boost low frequencies and ensure quiet commands are transcribed accurately.
+- **Instant Voice Barge-In (< 15ms)**: Saying *"Hey Veda"* in the middle of a song instantly pauses YouTube playback, rings the acoustic wake chime, and transitions smoothly into listening mode.
+- **Concise Spoken Responses**: Veda delivers warm, broadcast-quality spoken announcements powered by Edge Neural TTS (`en-US-AvaNeural`) with WebSpeech API resilience.
+
+### 2. 🎆 Fullscreen Ambient DJ Party Lights & Cover Art Sync
+- **Edge-to-Edge Stage Illumination**: Four corner ambient washes (`washTL`, `washTR`, `washBL`, `washBR`), central luminescence orbs, and sweeping laser beams.
+- **Dynamic Cover Art Color Extraction (`extractCoverArtColors`)**: Automatically analyzes active track artwork (`track.thumbnail`) and adapts ambient light gradients to match each song's unique color palette live.
+- **Audio-Reactive Beat Modulation**: Real-time frequency analysis dynamically pulses orbs, beams, and washes in sync with live bass, mids, and treble.
+- **Crystal Clear Aesthetic**: High-clarity radial diffusion designed to eliminate foggy center smudges.
+
+### 3. 🌓 Dark Mode & Single-Screen UI
+- **Navbar Theme Switcher**: Instant toggle between crisp Pure White theme and obsidian Dark Mode (`#070b14`) with `localStorage` persistence.
+- **Bounded Scrolling Marquee**: Center ticker bounded by vertical delimiter lines displaying command suggestions.
+- **Dynamic Stage View Swap**:
+  - **Paused State**: Blue Cloud Avatar (clickable for manual wake-up).
+  - **Playing State**: 7 rounded audio waveform bars bouncing rhythmically to live audio.
+- **Player Deck**: Bounded track metadata, seek bar, time labels, and playback controls.
+
+### 4. 🎵 Spotify-Style Synchronized Lyrics
+- Slide-out lyrics panel powered by LRCLIB with line-by-line synchronized scrolling.
+- Click any lyric line to seek directly to that timestamp in the track.
+- Dynamic background color matched to the current track's extracted cover art palette.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Prerequisites
 - [Node.js](https://nodejs.org/) (version 18 or higher recommended)
-- A modern web browser (Google Chrome, Microsoft Edge, or Firefox)
+- A modern web browser with microphone access (Chrome, Edge, Brave, Firefox)
 
-### 1. Clone the Repository
+### 2. Clone Repository
 ```bash
 git clone https://github.com/Ish-xo/Veda.git
 cd Veda
 ```
 
-### 2. Install Dependencies
+### 3. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Launch Application
+### 4. Start the Application
 ```bash
 npm start
 ```
-*(or `npm run dev` for automatic server restarts)*
+*(or `npm run dev` for auto-reloading)*
 
-### 4. Open in Browser
-Visit **`http://localhost:3000`** and click **Enter** to start listening.
-
----
-
-## 🗣️ Voice Commands & Shortcuts
-
-| Voice Command | Action |
-|---|---|
-| *"Hey Veda, play [Song / Artist]"* | Searches and streams the requested track with a spoken announcement |
-| *"Pause"* / *"Stop"* | Pauses music playback |
-| *"Resume"* / *"Play"* | Resumes playback |
-| *"Next song"* / *"Skip"* | Skips to a new trending track |
-| *"Forward 10 seconds"* | Seeks ahead by 10s |
-| *"Rewind 10 seconds"* | Seeks backward by 10s |
-| *"Skip intro"* | Seeks forward 15s |
-
-### Keyboard Shortcuts
-- <kbd>Space</kbd>: Play / Pause toggle
-- <kbd>→</kbd> / <kbd>←</kbd>: Seek forward / backward by 10s
-- <kbd>L</kbd>: Toggle Spotify-style synced lyrics panel
-- <kbd>V</kbd>: Trigger Veda voice listener manually
-- <kbd>Esc</kbd>: Close lyrics drawer
+### 5. Launch in Browser
+Open [http://localhost:3000](http://localhost:3000) in your browser. Click **Enter** on the intro screen to unlock the studio.
 
 ---
 
-## 🛠️ Architecture & Tech Stack
+## 🗣️ Voice Commands & Interactions
 
-- **Backend**: Node.js, Express, `youtube-sr`, `msedge-tts` (Neural TTS streaming).
-- **Frontend**: Vanilla HTML5, Modern ES6+ JavaScript, CSS3 Design Tokens & Variables (Light & Obsidian Dark Modes).
-- **Audio & Speech**: Web Audio API (`AudioContext`, `GainNode`, `AnalyserNode`), Web Speech Recognition API, YouTube IFrame API.
-- **Color Extraction**: HTML5 Canvas pixel analysis (`ctx.getImageData()`) for live album cover artwork palettes.
-- **Testing**: End-to-end test suite (`test-e2e.js`) covering speech intents, audio actions, theme toggles, and ambient lighting.
+| Command | Action |
+| :--- | :--- |
+| `"Hey Veda, play Starboy"` | Plays the requested song with concise spoken intro |
+| `"Veda, play Japanese City Pop"` | Searches and streams the genre |
+| `"Play something"` / `"Play music"` | Streams a trending song |
+| `"Pause"` / `"Stop music"` | Pauses current playback |
+| `"Resume"` / `"Unpause"` | Resumes playback |
+| `"Next song"` / `"Skip"` | Skips to the next track |
+| `"Forward 10 seconds"` | Seeks forward by 10s |
+| `"Rewind 10 seconds"` | Seeks backward by 10s |
+| `"Skip intro"` | Seeks ahead by 15s |
+
+---
+
+## ⌨️ Keyboard Shortcuts
+
+- `Space`: Play / Pause playback
+- `Arrow Right`: Seek forward 10 seconds
+- `Arrow Left`: Seek rewind 10 seconds
+- `Key L`: Toggle Spotify-style Synced Lyrics drawer
+- `Key V`: Trigger manual voice wake-up
+- `Escape`: Close open drawers and panels
+
+---
+
+## 🛠️ Project Structure
+
+```
+├── public/
+│   ├── index.html         # Main single-screen application markup & theme loader
+│   ├── css/
+│   │   └── style.css      # Design system, light/dark themes, DJ lights & layout
+│   ├── js/
+│   │   ├── app.js         # Core orchestrator, theme manager & cover art extractor
+│   │   ├── audio-engine.js# Web Audio API, YouTube player & visualizer engine
+│   │   └── speech-engine.js# Low-pitch STT, AGC booster & phonetic wake detector
+│   └── svg/               # Brand assets & cloud avatar graphics
+├── server.js              # Express backend, YouTube music search, Edge TTS & lyrics API
+├── test-e2e.js            # Automated end-to-end test suite (12 suites, 100% coverage)
+├── package.json           # Project dependencies & scripts
+└── README.md              # Project documentation
+```
+
+---
+
+## 🧪 Testing
+
+Run the automated test suite verifying all 12 endpoints, intents, theme switching, and visualizer elements:
+
+```bash
+node test-e2e.js
+```
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
