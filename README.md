@@ -17,16 +17,16 @@
 ## 📸 Visual Showcase
 
 <div align="center">
-  <h3>✨ Live Ambient Visualizer & Music Player</h3>
-  <img src="assets/screenshots/veda_stage_playing.png" width="90%" alt="Veda Playing Stage" />
+  <h3>🎙️ Voice-Ready Idle Stage & Avatar</h3>
+  <img src="assets/screenshots/veda_paused_stage.png" width="92%" alt="Veda Paused Stage & Avatar" />
   <br><br>
   
-  <h3>🎙️ Unlocked Studio Interface</h3>
-  <img src="assets/screenshots/unlocked_studio.png" width="90%" alt="Veda Unlocked Studio" />
+  <h3>✨ Live Audio Waveform Visualizer & DJ Lights</h3>
+  <img src="assets/screenshots/veda_playing_waveforms.png" width="92%" alt="Veda Playing Waveform Visualizer" />
   <br><br>
   
-  <h3>🎬 Fullscreen Intro Landing Experience</h3>
-  <img src="assets/screenshots/intro_landing.png" width="90%" alt="Veda Intro Landing Screen" />
+  <h3>🎵 Spotify-Style Synchronized Lyrics</h3>
+  <img src="assets/screenshots/veda_synced_lyrics.png" width="92%" alt="Veda Synchronized Lyrics Panel" />
 </div>
 
 ---
