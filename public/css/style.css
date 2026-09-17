@@ -1,0 +1,1112 @@
+/* =========================================================
+   VEDA • MINIMALIST MUSIC AI • LIGHT & DARK MODE UI
+   ========================================================= */
+
+:root {
+  --bg-page: #ffffff;
+  --text-main: #000000;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+  --border-light: #e5e7eb;
+  --delimiter-color: #000000;
+  --progress-fill-bg: #000000;
+  --deck-btn-color: #000000;
+  
+  --accent-blue: #3b82f6;
+  --accent-blue-hover: #2563eb;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+
+  --header-btn-bg: #f3f4f6;
+  --header-btn-border: #e5e7eb;
+  --header-btn-hover: #e5e7eb;
+  --header-btn-color: #4b5563;
+
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html.dark-theme,
+body.dark-theme {
+  --bg-page: #070b14;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+  --border-light: rgba(255, 255, 255, 0.14);
+  --delimiter-color: #ffffff;
+  --progress-fill-bg: #ffffff;
+  --deck-btn-color: #ffffff;
+
+  --header-btn-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-border: rgba(255, 255, 255, 0.16);
+  --header-btn-hover: rgba(255, 255, 255, 0.18);
+  --header-btn-color: #f1f5f9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* =========================================================
+   INTRO IMAGE ENTRY POINT OVERLAY
+   ========================================================= */
+.power-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0b0f19;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.55s ease, transform 0.55s ease;
+}
+
+.power-overlay.hidden,
+html.studio-entered .power-overlay {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  display: none !important;
+  transform: scale(1.03);
+}
+
+.intro-hero-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Fullscreen Intro Image */
+.fullscreen-intro-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: brightness(0.85);
+  transform: scale(1.02);
+  transition: transform 10s ease-out;
+}
+
+.intro-backdrop-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.55) 85%),
+              linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.15) 45%, rgba(0, 0, 0, 0.35) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Overlay Content (Text and Enter Button on Top Layer) */
+.intro-enter-overlay-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 24px;
+  max-width: 620px;
+  pointer-events: auto;
+}
+
+.intro-text-block {
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.intro-title {
+  font-size: 52px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -1.2px;
+  margin-bottom: 10px;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.75);
+}
+
+.intro-subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.55;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+  max-width: 490px;
+}
+
+/* From Uiverse.io by KINGFRESS */ 
+.intro-enter-btn {
+  pointer-events: auto;
+  font-weight: bold;
+  font-family: var(--font-main);
+  font-size: 16px;
+  color: white;
+  border-radius: 2rem;
+  cursor: pointer;
+  width: 120px;
+  height: 48px;
+  border: none;
+  background-color: #3653f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(54, 83, 248, 0.55), 0 0 0 2px rgba(255, 255, 255, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.2s ease;
+}
+
+.intro-enter-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 16px 36px rgba(54, 83, 248, 0.7), 0 0 0 3px rgba(255, 255, 255, 0.45);
+  background-color: #2b45e8;
+}
+
+.intro-enter-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.intro-enter-btn .span-mother {
+  display: flex;
+  overflow: hidden;
+}
+
+.intro-enter-btn:hover .span-mother {
+  position: absolute;
+}
+
+.intro-enter-btn:hover .span-mother span {
+  transform: translateY(1.2em);
+}
+
+.intro-enter-btn .span-mother span:nth-child(1) {
+  transition: 0.2s;
+}
+
+.intro-enter-btn .span-mother span:nth-child(2) {
+  transition: 0.3s;
+}
+
+.intro-enter-btn .span-mother span:nth-child(3) {
+  transition: 0.4s;
+}
+
+.intro-enter-btn .span-mother span:nth-child(4) {
+  transition: 0.5s;
+}
+
+.intro-enter-btn .span-mother span:nth-child(5) {
+  transition: 0.6s;
+}
+
+.intro-enter-btn .span-mother span:nth-child(6) {
+  transition: 0.7s;
+}
+
+.intro-enter-btn .span-mother2 {
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+}
+
+.intro-enter-btn .span-mother2 span {
+  transform: translateY(-1.2em);
+}
+
+.intro-enter-btn:hover .span-mother2 span {
+  transform: translateY(0);
+}
+
+.intro-enter-btn .span-mother2 span {
+  transition: 0.2s;
+}
+
+.intro-enter-btn .span-mother2 span:nth-child(2) {
+  transition: 0.3s;
+}
+
+.intro-enter-btn .span-mother2 span:nth-child(3) {
+  transition: 0.4s;
+}
+
+.intro-enter-btn .span-mother2 span:nth-child(4) {
+  transition: 0.5s;
+}
+
+.intro-enter-btn .span-mother2 span:nth-child(5) {
+  transition: 0.6s;
+}
+
+.intro-enter-btn .span-mother2 span:nth-child(6) {
+  transition: 0.7s;
+}
+
+/* =========================================================
+   APPLICATION VIEWPORT
+   ========================================================= */
+.app-viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-page);
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================================
+   1. HEADER / NAVIGATION BAR (Fixed Top)
+   ========================================================= */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 44px;
+  background: transparent;
+  z-index: 50;
+  box-sizing: border-box;
+}
+
+/* Brand Logo (Left Corner) */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+}
+
+.brand-icon-box {
+  width: 38px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-cloud-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent-blue);
+  letter-spacing: -0.6px;
+}
+
+/* Center: Bounded Scrolling Ticker */
+.header-ticker-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  max-width: calc(100vw - 380px);
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ticker-delimiter {
+  width: 2px;
+  height: 28px;
+  background-color: var(--delimiter-color);
+  flex-shrink: 0;
+  transition: background-color 0.3s ease;
+}
+
+.ticker-track-window {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+}
+
+.ticker-scroll-text {
+  display: flex;
+  white-space: nowrap;
+  animation: marqueeTicker 24s linear infinite;
+  will-change: transform;
+}
+
+.ticker-phrase {
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: 0.6px;
+  padding-right: 24px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+@keyframes marqueeTicker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Right: State Indicator, Theme Toggle & Party Lights */
+.header-state-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 140px;
+  z-index: 10;
+}
+
+/* Dark Mode Theme Toggle Button */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--header-btn-bg);
+  border: 1px solid var(--header-btn-border);
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 10px;
+  color: var(--header-btn-color);
+  user-select: none;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  background: var(--header-btn-hover);
+}
+
+/* DJ Party Lights Toggle Button */
+.dj-lights-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--header-btn-bg);
+  border: 1px solid var(--header-btn-border);
+  border-radius: 9999px;
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--header-btn-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 14px;
+  user-select: none;
+}
+
+.dj-lights-toggle-btn:hover {
+  background: var(--header-btn-hover);
+  color: var(--text-main);
+  transform: translateY(-1px);
+}
+
+.dj-lights-toggle-btn.active {
+  background: rgba(59, 130, 246, 0.16);
+  border-color: rgba(59, 130, 246, 0.45);
+  color: var(--accent-blue);
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.2);
+}
+
+.dj-lights-toggle-btn.active .dj-lights-icon {
+  display: inline-block;
+  animation: spinGlow 3s linear infinite;
+}
+
+@keyframes spinGlow {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.18) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+.state-indicator-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.state-indicator-pill.state-listening {
+  color: var(--accent-green);
+  animation: pulseState 1.5s infinite alternate ease-in-out;
+}
+
+.state-indicator-pill.state-speaking {
+  color: var(--accent-blue);
+}
+
+@keyframes pulseState {
+  0% { opacity: 0.85; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1.02); }
+}
+
+/* =========================================================
+   AMBIENT MUSIC-SYNCED DJ & PARTY LIGHTS (Stage Backdrop)
+   ========================================================= */
+.ambient-dj-lights {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.ambient-dj-lights.disabled {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* 4 Fullscreen Corner Washes for Edge-to-Edge Vibrant Screen Coverage */
+.dj-corner-wash {
+  position: absolute;
+  width: 55vw;
+  height: 55vh;
+  border-radius: 50%;
+  filter: blur(36px);
+  will-change: transform, opacity, background;
+  transition: opacity 0.35s ease, transform 0.12s ease-out, background 0.4s ease;
+  pointer-events: none;
+}
+
+.wash-tl {
+  top: -12vh;
+  left: -12vw;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.38) 0%, rgba(59, 130, 246, 0.08) 55%, transparent 75%);
+  opacity: 0.65;
+}
+
+.wash-tr {
+  top: -12vh;
+  right: -12vw;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.35) 0%, rgba(236, 72, 153, 0.07) 55%, transparent 75%);
+  opacity: 0.60;
+}
+
+.wash-bl {
+  bottom: -12vh;
+  left: -12vw;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.32) 0%, rgba(6, 182, 212, 0.06) 55%, transparent 75%);
+  opacity: 0.55;
+}
+
+.wash-br {
+  bottom: -12vh;
+  right: -12vw;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.35) 0%, rgba(147, 51, 234, 0.07) 55%, transparent 75%);
+  opacity: 0.60;
+}
+
+/* Stage Wash Ambient Luminescence (Clean, subtle, NOT FOGGY) */
+.dj-stage-wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.06) 0%, transparent 65%);
+  opacity: 0.45;
+  transition: opacity 0.3s ease, background 0.4s ease;
+  will-change: opacity, background;
+}
+
+/* Crisp, Radiant Light Orbs (Clean blur 36px - avoids muddy/foggy center) */
+.dj-light-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(36px);
+  will-change: transform, opacity, background;
+  transition: transform 0.08s ease-out, opacity 0.15s ease-out, background 0.4s ease;
+}
+
+.orb-primary {
+  width: 500px;
+  height: 500px;
+  top: calc(50% - 250px);
+  left: calc(50% - 250px);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.42) 0%, rgba(59, 130, 246, 0.08) 55%, transparent 75%);
+  opacity: 0.60;
+  transform: scale(0.95);
+}
+
+.orb-secondary {
+  width: 420px;
+  height: 420px;
+  top: calc(50% - 210px);
+  left: calc(50% - 130px);
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.36) 0%, rgba(236, 72, 153, 0.07) 55%, transparent 75%);
+  opacity: 0.50;
+  transform: scale(0.90);
+}
+
+.orb-accent {
+  width: 360px;
+  height: 360px;
+  top: calc(50% - 180px);
+  left: calc(50% - 260px);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.30) 0%, rgba(6, 182, 212, 0.05) 55%, transparent 75%);
+  opacity: 0.45;
+  transform: scale(0.85);
+}
+
+/* Atmospheric DJ Strobe Beams (Clean Laser Sweeps) */
+.dj-strobe-beam {
+  position: absolute;
+  width: 100vw;
+  height: 180px;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0% 50%;
+  filter: blur(35px);
+  opacity: 0.25;
+  pointer-events: none;
+  transition: transform 0.1s ease-out, opacity 0.15s ease-out, background 0.4s ease;
+}
+
+.beam-left {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.45) 0%, transparent 80%);
+  transform: translateY(-50%) rotate(-35deg);
+}
+
+.beam-right {
+  background: linear-gradient(90deg, rgba(236, 72, 153, 0.45) 0%, transparent 80%);
+  transform: translateY(-50%) rotate(35deg);
+}
+
+/* =========================================================
+   2. CENTRAL STAGE & DYNAMIC STATE SWAP
+   ========================================================= */
+.central-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 90px;
+  z-index: 2;
+}
+
+.stage-swap-wrapper {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Common Stage View Properties */
+.stage-view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.stage-view.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* Avatar View (Paused / Idle State) */
+.cloud-avatar-frame {
+  width: 230px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cloud-avatar-frame:hover {
+  transform: scale(1.08);
+}
+
+.cloud-avatar-frame:active {
+  transform: scale(0.96);
+}
+
+.cloud-avatar-graphic {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 28px rgba(59, 130, 246, 0.18));
+}
+
+.avatar-tap-hint {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* Waveform Visualizer View (Playing State) - 7 Rounded Blue Bars */
+.audio-bars-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  height: 220px;
+  width: 100%;
+}
+
+.wave-bar {
+  width: 14px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #60a5fa 0%, var(--accent-blue) 100%);
+  min-height: 18px;
+  max-height: 190px;
+  box-shadow: 0 4px 18px rgba(59, 130, 246, 0.35);
+  transition: height 0.06s cubic-bezier(0.2, 0, 0.38, 0.9);
+  will-change: height, transform;
+}
+
+/* Symmetrical Bar Base Heights */
+.bar-1 { height: 38px; }
+.bar-2 { height: 68px; }
+.bar-3 { height: 108px; }
+.bar-4 { height: 160px; box-shadow: 0 6px 24px rgba(59, 130, 246, 0.5); }
+.bar-5 { height: 108px; }
+.bar-6 { height: 68px; }
+.bar-7 { height: 38px; }
+
+/* =========================================================
+   3. PLAYER CONTROL DECK (Center-Bottom)
+   ========================================================= */
+.player-deck {
+  position: fixed;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 440px;
+  max-width: calc(100vw - 48px);
+  background: transparent;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+}
+
+.deck-inner-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Top Meta Row (Cover + Info + Delimiter Line) */
+.deck-meta-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.deck-cover-container {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--accent-blue);
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+}
+
+.deck-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.deck-cover-fallback {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-blue);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.deck-track-info-bounded {
+  flex: 1;
+  margin-left: 14px;
+  margin-right: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  max-width: 320px;
+}
+
+.title-scroller, .artist-scroller {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.track-title-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.track-artist-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+/* Hard Boundary Line Constraint */
+.deck-boundary-delimiter {
+  width: 2.5px;
+  height: 38px;
+  background-color: var(--delimiter-color);
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: background-color 0.3s ease;
+}
+
+/* Timeline / Seek Bar Row */
+.deck-timeline-row {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.deck-progress-bar {
+  width: 100%;
+  height: 5px;
+  background: var(--border-light);
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.deck-progress-track {
+  width: 100%;
+  height: 4px;
+  background: var(--border-light);
+  border-radius: 9999px;
+  position: relative;
+}
+
+.deck-progress-fill {
+  height: 100%;
+  background: var(--progress-fill-bg);
+  border-radius: 9999px;
+  width: 0%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+
+.deck-progress-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--progress-fill-bg);
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease, background 0.3s ease;
+  pointer-events: none;
+}
+
+.deck-progress-bar:hover .deck-progress-thumb,
+.deck-progress-bar.dragging .deck-progress-thumb {
+  opacity: 1;
+}
+
+.deck-time-display {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+}
+
+/* Bottom Controls Row */
+.deck-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  padding-top: 4px;
+}
+
+.deck-playback-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.deck-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--deck-btn-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: transform 0.15s ease, color 0.2s ease;
+}
+
+.deck-btn:hover {
+  transform: scale(1.18);
+}
+
+.deck-btn:active {
+  transform: scale(0.92);
+}
+
+.lyrics-toggle-btn {
+  margin-left: auto;
+  color: var(--deck-btn-color);
+}
+
+.lyrics-toggle-btn.active {
+  color: var(--accent-blue);
+  transform: scale(1.08);
+}
+
+/* =========================================================
+   4. SPOTIFY-STYLE SLIDE-OUT LYRICS PANEL (Right Side)
+   ========================================================= */
+.spotify-lyrics-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #2b1f1a;
+  z-index: 100;
+  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.spotify-lyrics-panel.open {
+  transform: translateX(0);
+}
+
+.lyrics-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.lyrics-track-summary {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.lyrics-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 3px;
+}
+
+.lyrics-song-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.lyrics-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.lyrics-close-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.06);
+}
+
+.lyrics-panel-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px 28px 90px;
+  scroll-behavior: smooth;
+  mask-image: linear-gradient(to bottom, transparent, black 30px, black calc(100% - 40px), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 30px, black calc(100% - 40px), transparent);
+}
+
+/* Custom Minimal Scrollbar */
+.lyrics-panel-scroll-area::-webkit-scrollbar {
+  width: 4px;
+}
+
+.lyrics-panel-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+}
+
+.spotify-lyrics-stream {
+  display: flex;
+  flex-direction: column;
+}
+
+.spotify-lyric-line {
+  font-size: 21px;
+  line-height: 1.65;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+  will-change: transform, color;
+}
+
+.spotify-lyric-line:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.spotify-lyric-line.active {
+  color: #ffffff;
+  font-size: 23px;
+  transform: scale(1.03);
+  transform-origin: left center;
+  opacity: 1;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.spotify-lyric-line.placeholder {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  cursor: default;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN ADJUSTMENTS
+   ========================================================= */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 20px;
+    height: 68px;
+  }
+
+  .header-ticker-container {
+    display: none; /* Hide on small mobile to avoid header clutter */
+  }
+
+  .player-deck {
+    width: calc(100vw - 32px);
+    bottom: 20px;
+  }
+
+  .spotify-lyrics-panel {
+    width: 100vw;
+    max-width: 100vw;
+  }
+}

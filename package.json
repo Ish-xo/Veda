@@ -1,0 +1,30 @@
+{
+  "name": "veda-music-ai",
+  "version": "1.0.0",
+  "description": "Music AI web app with Veda - natural voice, instant barge-in interruption, and auto music ducking",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "radio",
+    "dj",
+    "voice",
+    "barge-in",
+    "audio-ducking",
+    "web-audio"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@distube/ytdl-core": "^4.16.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "msedge-tts": "^2.0.7",
+    "play-dl": "^1.9.7",
+    "youtube-sr": "^4.3.12"
+  }
+}
